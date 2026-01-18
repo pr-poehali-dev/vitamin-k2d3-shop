@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Icon from '@/components/ui/icon';
+import AddressAutocomplete from '@/components/AddressAutocomplete';
 
 export default function Index() {
   const [paymentMethod, setPaymentMethod] = useState('card');
@@ -17,6 +18,7 @@ export default function Index() {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -24,7 +26,7 @@ export default function Index() {
   const discountPrice = 1118;
 
   const handleSubmitOrder = async () => {
-    if (!fullName || !phone || !email || !deliveryMethod) {
+    if (!fullName || !phone || !email || !address || !deliveryMethod) {
       alert('Пожалуйста, заполните все обязательные поля');
       return;
     }
@@ -41,6 +43,7 @@ export default function Index() {
           fullName,
           phone,
           email,
+          address,
           quantity,
           deliveryMethod,
           paymentMethod,
@@ -456,6 +459,14 @@ export default function Index() {
 
                 <Separator />
 
+                <AddressAutocomplete
+                  value={address}
+                  onChange={setAddress}
+                  required
+                />
+
+                <Separator />
+
                 <div className="space-y-2">
                   <Label htmlFor="delivery">Способ доставки <span className="text-destructive">*</span></Label>
                   <Select value={deliveryMethod} onValueChange={setDeliveryMethod} required>
@@ -548,7 +559,7 @@ export default function Index() {
                   className="w-full" 
                   size="lg"
                   onClick={handleSubmitOrder}
-                  disabled={isSubmitting || !fullName || !phone || !email || !deliveryMethod}
+                  disabled={isSubmitting || !fullName || !phone || !email || !address || !deliveryMethod}
                 >
                   <Icon name="ShoppingBag" size={18} className="mr-2" />
                   {isSubmitting ? 'Оформление...' : 'Оформить заказ'}

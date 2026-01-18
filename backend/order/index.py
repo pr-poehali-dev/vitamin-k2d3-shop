@@ -37,12 +37,13 @@ def handler(event: dict, context) -> dict:
         full_name = body.get('fullName', '')
         phone = body.get('phone', '')
         email = body.get('email', '')
+        address = body.get('address', '')
         quantity = body.get('quantity', 1)
         delivery_method = body.get('deliveryMethod', '')
         payment_method = body.get('paymentMethod', '')
         total = body.get('total', 0)
         
-        if not all([full_name, phone, email, delivery_method]):
+        if not all([full_name, phone, email, address, delivery_method]):
             return {
                 'statusCode': 400,
                 'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
@@ -72,6 +73,7 @@ def handler(event: dict, context) -> dict:
 ФИО: {full_name}
 📞 Телефон: {phone}
 📧 Email: {email}
+🏠 Адрес: {address}
 
 🚚 Доставка: {delivery_names.get(delivery_method, delivery_method)}
 💳 Оплата: {payment_names.get(payment_method, payment_method)}"""
@@ -107,6 +109,7 @@ def handler(event: dict, context) -> dict:
             <p><strong>ФИО:</strong> {full_name}</p>
             <p><strong>Телефон:</strong> {phone}</p>
             <p><strong>Email:</strong> {email}</p>
+            <p><strong>Адрес:</strong> {address}</p>
             
             <h3>Детали доставки и оплаты:</h3>
             <p><strong>Способ доставки:</strong> {delivery_names.get(delivery_method, delivery_method)}</p>
@@ -166,6 +169,7 @@ def handler(event: dict, context) -> dict:
                 "customer_name": full_name,
                 "customer_phone": phone,
                 "customer_email": email,
+                "customer_address": address,
                 "delivery_method": delivery_method,
                 "quantity": quantity
             }

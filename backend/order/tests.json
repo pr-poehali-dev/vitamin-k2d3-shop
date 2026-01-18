@@ -8,6 +8,7 @@
         "fullName": "Иванов Иван Иванович",
         "phone": "+7 (999) 123-45-67",
         "email": "test@example.com",
+        "address": "г Москва, ул Ленина, д 1, кв 10",
         "quantity": 2,
         "deliveryMethod": "cdek",
         "paymentMethod": "card",
@@ -27,7 +28,8 @@
       "body": {
         "fullName": "",
         "phone": "",
-        "email": ""
+        "email": "",
+        "address": ""
       },
       "expectedStatus": 400,
       "expectedBody": {
