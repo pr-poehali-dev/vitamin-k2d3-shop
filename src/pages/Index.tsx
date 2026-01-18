@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Separator } from '@/components/ui/separator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Icon from '@/components/ui/icon';
 
 export default function Index() {
@@ -18,6 +19,14 @@ export default function Index() {
   const [quantity, setQuantity] = useState(1);
 
   const productPrice = 2490;
+  
+  const productImages = [
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/1.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/2.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/3.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/4.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/5.jpg'
+  ];
 
   const calculateDelivery = () => {
     const costs = {
@@ -38,9 +47,12 @@ export default function Index() {
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       <header className="bg-white/80 backdrop-blur-sm border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Icon name="Sun" className="text-primary" size={32} />
-            <h1 className="text-2xl font-bold text-foreground">VitaHealth</h1>
+          <div className="flex items-center gap-3">
+            <img 
+              src="https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/logo%20PharmExpert_%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%201.jpg" 
+              alt="PharmExpert" 
+              className="h-12 w-auto object-contain"
+            />
           </div>
           <nav className="hidden md:flex gap-6">
             <a href="#benefits" className="text-foreground hover:text-primary transition">Преимущества</a>
@@ -94,11 +106,21 @@ export default function Index() {
             </div>
             <div className="relative animate-scale-in">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-3xl"></div>
-              <img 
-                src="https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/f01c4f65-4fe5-4857-bf02-34a3238a5628.jpg"
-                alt="Vitamin K2 + D3 MAX"
-                className="relative rounded-2xl shadow-2xl w-full"
-              />
+              <Carousel className="relative w-full max-w-xl mx-auto">
+                <CarouselContent>
+                  {productImages.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <img 
+                        src={image}
+                        alt={`Vitamin K2 + D3 MAX - фото ${index + 1}`}
+                        className="relative rounded-2xl shadow-2xl w-full object-cover"
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
+              </Carousel>
             </div>
           </div>
         </div>
@@ -603,8 +625,11 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <Icon name="Sun" size={24} />
-              <span className="font-bold text-xl">VitaHealth</span>
+              <img 
+                src="https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/logo%20PharmExpert_%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%201.jpg" 
+                alt="PharmExpert" 
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </div>
             <p className="text-sm opacity-75">
               © 2026 VitaHealth. Все права защищены.
