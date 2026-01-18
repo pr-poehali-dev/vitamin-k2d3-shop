@@ -22,11 +22,9 @@ export default function Index() {
   const discountPrice = 1118;
   
   const productImages = [
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/5ac5bf0e-7e28-4df4-9703-d4479f545026.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/f01c4f65-4fe5-4857-bf02-34a3238a5628.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/5ac5bf0e-7e28-4df4-9703-d4479f545026.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/f01c4f65-4fe5-4857-bf02-34a3238a5628.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/5ac5bf0e-7e28-4df4-9703-d4479f545026.jpg'
+    'https://cdn.poehali.dev/files/3.png',
+    'https://cdn.poehali.dev/files/4.png',
+    'https://cdn.poehali.dev/files/5.png'
   ];
   
   const certificateImages = [
