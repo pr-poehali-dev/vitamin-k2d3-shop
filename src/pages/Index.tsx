@@ -19,13 +19,20 @@ export default function Index() {
   const [quantity, setQuantity] = useState(1);
 
   const productPrice = 2490;
+  const discountPrice = 1118;
   
   const productImages = [
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/1.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/2.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/3.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/4.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B8%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%BE%D0%B2/5.jpg'
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/Карточки товаров/1.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/Карточки товаров/2.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/Карточки товаров/3.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/Карточки товаров/4.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/Карточки товаров/5.jpg'
+  ];
+  
+  const certificateImages = [
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/Сертификат/1.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/Сертификат/2.jpg',
+    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/Сертификат/3.jpg'
   ];
 
   const calculateDelivery = () => {
@@ -41,23 +48,20 @@ export default function Index() {
     }
   };
 
-  const totalPrice = productPrice * quantity + (deliveryCost || 0);
+  const totalPrice = discountPrice * quantity + (deliveryCost || 0);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       <header className="bg-white/80 backdrop-blur-sm border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img 
-              src="https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/logo%20PharmExpert_%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%201.jpg" 
-              alt="PharmExpert" 
-              className="h-12 w-auto object-contain"
-            />
+            <h1 className="text-2xl font-bold text-foreground">PharmExpert</h1>
           </div>
           <nav className="hidden md:flex gap-6">
             <a href="#benefits" className="text-foreground hover:text-primary transition">Преимущества</a>
             <a href="#composition" className="text-foreground hover:text-primary transition">Состав</a>
             <a href="#reviews" className="text-foreground hover:text-primary transition">Отзывы</a>
+            <a href="#certificates" className="text-foreground hover:text-primary transition">Сертификаты</a>
             <a href="#order" className="text-foreground hover:text-primary transition">Заказать</a>
             <a href="#faq" className="text-foreground hover:text-primary transition">FAQ</a>
           </nav>
@@ -94,10 +98,12 @@ export default function Index() {
                   <span>120 капсул</span>
                 </div>
               </div>
-              <div className="flex gap-4 pt-4">
+              <div className="flex gap-4 pt-4 items-center">
                 <Button size="lg" className="text-lg px-8">
                   <Icon name="ShoppingBag" size={20} className="mr-2" />
-                  Купить за {productPrice}₽
+                  <span className="flex items-center gap-2">
+                    Купить за <span className="line-through opacity-60">{productPrice}₽</span> {discountPrice}₽
+                  </span>
                 </Button>
                 <Button size="lg" variant="outline" className="text-lg">
                   Подробнее
@@ -490,7 +496,7 @@ export default function Index() {
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground">Товары ({quantity} шт.)</span>
-                    <span>{productPrice * quantity}₽</span>
+                    <span>{discountPrice * quantity}₽</span>
                   </div>
                   {deliveryCost !== null && (
                     <div className="flex justify-between items-center text-sm">
@@ -519,7 +525,31 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="faq" className="py-16 bg-white">
+      <section id="certificates" className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
+            Сертификаты качества
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">
+            Наш продукт сертифицирован и соответствует всем стандартам
+          </p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {certificateImages.map((image, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow overflow-hidden">
+                <CardContent className="p-0">
+                  <img 
+                    src={image}
+                    alt={`Сертификат ${index + 1}`}
+                    className="w-full h-auto object-contain"
+                  />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
             Часто задаваемые вопросы
@@ -555,7 +585,7 @@ export default function Index() {
                   На сколько хватает одной упаковки?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
-                  В упаковке 90 капсул, при рекомендуемом приёме 1 капсула в день — это 3 месяца применения.
+                  В упаковке 120 капсул, при рекомендуемом приёме 1 капсула в день — это 4 месяца применения.
                 </AccordionContent>
               </AccordionItem>
 
@@ -625,14 +655,10 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <img 
-                src="https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/logo%20PharmExpert_%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%201.jpg" 
-                alt="PharmExpert" 
-                className="h-10 w-auto object-contain brightness-0 invert"
-              />
+              <span className="font-bold text-xl">PharmExpert</span>
             </div>
             <p className="text-sm opacity-75">
-              © 2026 VitaHealth. Все права защищены.
+              © 2026 PharmExpert. Все права защищены.
             </p>
             <div className="flex gap-4">
               <a href="#" className="hover:text-primary transition">
