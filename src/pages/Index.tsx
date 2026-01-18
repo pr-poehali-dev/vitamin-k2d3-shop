@@ -52,11 +52,11 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       <header className="bg-white/80 backdrop-blur-sm border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-foreground">PharmExpert</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground">PharmExpert</h1>
           </div>
-          <nav className="hidden md:flex gap-6">
+          <nav className="hidden md:flex gap-4 lg:gap-6 text-sm lg:text-base">
             <a href="#benefits" className="text-foreground hover:text-primary transition">Преимущества</a>
             <a href="#composition" className="text-foreground hover:text-primary transition">Состав</a>
             <a href="#reviews" className="text-foreground hover:text-primary transition">Отзывы</a>
@@ -64,47 +64,47 @@ export default function Index() {
             <a href="#order" className="text-foreground hover:text-primary transition">Заказать</a>
             <a href="#faq" className="text-foreground hover:text-primary transition">FAQ</a>
           </nav>
-          <Button variant="default" className="hidden md:inline-flex">
-            <Icon name="ShoppingCart" size={18} className="mr-2" />
+          <Button variant="default" className="hidden md:inline-flex" size="sm">
+            <Icon name="ShoppingCart" size={16} className="mr-2" />
             Корзина
           </Button>
         </div>
       </header>
 
-      <section className="py-16 md:py-24">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-24">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
               <Badge className="bg-accent text-accent-foreground">Новинка 2026</Badge>
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight">
                 Vitamin K2 + D3 <span className="text-primary">MAX</span>
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Синергия двух витаминов для здоровья костей, сердца и иммунитета. 
                 Натуральный состав, максимальная биодоступность.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3 text-sm sm:text-base">
                 <div className="flex items-center gap-2">
-                  <Icon name="Check" className="text-primary" size={20} />
+                  <Icon name="Check" className="text-primary" size={18} />
                   <span>100% натуральный</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Icon name="Check" className="text-primary" size={20} />
+                  <Icon name="Check" className="text-primary" size={18} />
                   <span>Премиальное сырье</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Icon name="Check" className="text-primary" size={20} />
+                  <Icon name="Check" className="text-primary" size={18} />
                   <span>120 капсул</span>
                 </div>
               </div>
-              <div className="flex gap-4 pt-4 items-center">
-                <Button size="lg" className="text-lg px-8">
-                  <Icon name="ShoppingBag" size={20} className="mr-2" />
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto">
+                  <Icon name="ShoppingBag" size={18} className="mr-2" />
                   <span className="flex items-center gap-2">
                     Купить за <span className="line-through opacity-60">{productPrice}₽</span> {discountPrice}₽
                   </span>
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg">
+                <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto">
                   Подробнее
                 </Button>
               </div>
@@ -118,13 +118,13 @@ export default function Index() {
                       <img 
                         src={image}
                         alt={`Vitamin K2 + D3 MAX - фото ${index + 1}`}
-                        className="relative rounded-2xl shadow-2xl w-full object-cover"
+                        className="relative rounded-xl sm:rounded-2xl shadow-2xl w-full object-contain"
                       />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="left-4" />
-                <CarouselNext className="right-4" />
+                <CarouselPrevious className="left-2 sm:left-4" />
+                <CarouselNext className="right-2 sm:right-4" />
               </Carousel>
             </div>
           </div>
@@ -133,10 +133,10 @@ export default function Index() {
 
       <section id="benefits" className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center mb-8 sm:mb-12">
             Почему выбирают <span className="text-primary">K2 + D3 MAX</span>
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
               {
                 icon: 'Bone',
@@ -174,10 +174,10 @@ export default function Index() {
                   <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <Icon name={benefit.icon as any} className="text-primary" size={32} />
                   </div>
-                  <CardTitle className="text-xl">{benefit.title}</CardTitle>
+                  <CardTitle className="text-lg sm:text-xl">{benefit.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">{benefit.description}</p>
+                  <p className="text-sm sm:text-base text-muted-foreground">{benefit.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -188,19 +188,19 @@ export default function Index() {
       <section id="composition" className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center mb-3 sm:mb-4">
               Состав и дозировки
             </h2>
-            <p className="text-center text-muted-foreground mb-12 text-lg">
+            <p className="text-center text-muted-foreground mb-8 sm:mb-12 text-sm sm:text-base md:text-lg">
               Оптимальное соотношение для максимальной эффективности
             </p>
             
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8">
               <Card className="border-2 border-primary/30">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-2xl">Витамин D3</CardTitle>
-                    <Badge variant="secondary" className="text-lg">5000 МЕ</Badge>
+                    <CardTitle className="text-xl sm:text-2xl">Витамин D3</CardTitle>
+                    <Badge variant="secondary" className="text-base sm:text-lg">5000 МЕ</Badge>
                   </div>
                   <CardDescription>Холекальциферол</CardDescription>
                 </CardHeader>
@@ -283,10 +283,10 @@ export default function Index() {
 
       <section id="reviews" className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center mb-8 sm:mb-12">
             Отзывы покупателей
           </h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
             {[
               {
                 name: 'Анна Петрова',
@@ -320,7 +320,7 @@ export default function Index() {
                   <CardDescription className="text-xs">{review.date}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">{review.text}</p>
+                  <p className="text-sm sm:text-base text-muted-foreground">{review.text}</p>
                 </CardContent>
               </Card>
             ))}
@@ -330,17 +330,17 @@ export default function Index() {
 
       <section id="order" className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center mb-8 sm:mb-12">
             Оформление заказа
           </h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                   <Icon name="Package" className="text-primary" />
                   Калькулятор доставки
                 </CardTitle>
-                <CardDescription>Рассчитайте стоимость доставки в ваш город</CardDescription>
+                <CardDescription className="text-sm">Рассчитайте стоимость доставки в ваш город</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -504,14 +504,14 @@ export default function Index() {
                     </div>
                   )}
                   <Separator />
-                  <div className="flex justify-between items-center text-lg font-bold">
+                  <div className="flex justify-between items-center text-base sm:text-lg font-bold">
                     <span>Итого:</span>
                     <span className="text-primary">{totalPrice}₽</span>
                   </div>
                 </div>
 
                 <Button className="w-full" size="lg">
-                  <Icon name="ShoppingBag" size={20} className="mr-2" />
+                  <Icon name="ShoppingBag" size={18} className="mr-2" />
                   Оформить заказ
                 </Button>
 
@@ -526,20 +526,21 @@ export default function Index() {
 
       <section id="certificates" className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center mb-3 sm:mb-4">
             Сертификаты качества
           </h2>
-          <p className="text-center text-muted-foreground mb-12 text-lg">
+          <p className="text-center text-muted-foreground mb-8 sm:mb-12 text-sm sm:text-base md:text-lg px-4">
             Наш продукт сертифицирован и соответствует всем стандартам
           </p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {certificateImages.map((image, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow overflow-hidden">
                 <CardContent className="p-0">
                   <img 
                     src={image}
                     alt={`Сертификат ${index + 1}`}
-                    className="w-full h-auto object-contain"
+                    className="w-full h-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
+                    onClick={() => window.open(image, '_blank')}
                   />
                 </CardContent>
               </Card>
@@ -550,30 +551,30 @@ export default function Index() {
 
       <section id="faq" className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center mb-3 sm:mb-4">
             Часто задаваемые вопросы
           </h2>
-          <p className="text-center text-muted-foreground mb-12 text-lg">
+          <p className="text-center text-muted-foreground mb-8 sm:mb-12 text-sm sm:text-base md:text-lg px-4">
             Ответы на популярные вопросы о продукте
           </p>
           
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="item-1" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                <AccordionTrigger className="text-base sm:text-lg font-semibold hover:text-primary">
                   Как принимать витамины K2 + D3?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-sm sm:text-base text-muted-foreground">
                   Рекомендуется принимать 1 капсулу в день во время еды, желательно с пищей, содержащей жиры, 
                   для лучшего усвоения. Курс приёма — 3 месяца.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="item-2" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                <AccordionTrigger className="text-base sm:text-lg font-semibold hover:text-primary">
                   Есть ли противопоказания?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-sm sm:text-base text-muted-foreground">
                   Индивидуальная непереносимость компонентов, беременность и период лактации (требуется консультация врача), 
                   приём антикоагулянтов. Перед применением рекомендуется проконсультироваться со специалистом.
                 </AccordionContent>
@@ -622,29 +623,29 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-white">
+      <section className="py-12 sm:py-16 bg-gradient-to-r from-primary to-primary/80 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
             Остались вопросы?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90">
             Свяжитесь с нами любым удобным способом
           </p>
-          <div className="flex flex-wrap justify-center gap-6 mb-8">
-            <a href="tel:+78001234567" className="flex items-center gap-2 text-lg hover:underline">
-              <Icon name="Phone" size={20} />
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
+            <a href="tel:+78001234567" className="flex items-center justify-center gap-2 text-base sm:text-lg hover:underline">
+              <Icon name="Phone" size={18} />
               8 (800) 123-45-67
             </a>
-            <a href="mailto:info@vitahealth.ru" className="flex items-center gap-2 text-lg hover:underline">
-              <Icon name="Mail" size={20} />
+            <a href="mailto:info@vitahealth.ru" className="flex items-center justify-center gap-2 text-base sm:text-lg hover:underline">
+              <Icon name="Mail" size={18} />
               info@vitahealth.ru
             </a>
-            <a href="#" className="flex items-center gap-2 text-lg hover:underline">
-              <Icon name="MessageCircle" size={20} />
+            <a href="#" className="flex items-center justify-center gap-2 text-base sm:text-lg hover:underline">
+              <Icon name="MessageCircle" size={18} />
               Telegram
             </a>
           </div>
-          <p className="text-sm opacity-75">
+          <p className="text-xs sm:text-sm opacity-75">
             Режим работы: Пн-Пт с 9:00 до 18:00 (МСК)
           </p>
         </div>
