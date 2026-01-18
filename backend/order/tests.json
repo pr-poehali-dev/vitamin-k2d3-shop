@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "name": "Успешное оформление заказа",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "fullName": "Иванов Иван Иванович",
+        "phone": "+7 (999) 123-45-67",
+        "email": "test@example.com",
+        "quantity": 2,
+        "deliveryMethod": "cdek",
+        "paymentMethod": "card",
+        "total": 2236
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Проверка обязательных полей",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "fullName": "",
+        "phone": "",
+        "email": ""
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

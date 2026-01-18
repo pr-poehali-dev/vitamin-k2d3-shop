@@ -14,9 +14,59 @@ import Icon from '@/components/ui/icon';
 export default function Index() {
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [quantity, setQuantity] = useState(1);
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [deliveryMethod, setDeliveryMethod] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const productPrice = 2490;
   const discountPrice = 1118;
+
+  const handleSubmitOrder = async () => {
+    if (!fullName || !phone || !email || !deliveryMethod) {
+      alert('Пожалуйста, заполните все обязательные поля');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/534f3530-abca-477f-80ee-ce1522fd46ac', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName,
+          phone,
+          email,
+          quantity,
+          deliveryMethod,
+          paymentMethod,
+          total: discountPrice * quantity
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
+        setFullName('');
+        setPhone('');
+        setEmail('');
+        setDeliveryMethod('');
+        setQuantity(1);
+      } else {
+        alert(data.error || 'Произошла ошибка при оформлении заказа');
+      }
+    } catch (error) {
+      alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+      console.error('Order error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   
   const productImages = [
     'https://cdn.poehali.dev/files/1.png',
@@ -48,10 +98,7 @@ export default function Index() {
             <a href="#order" className="text-foreground hover:text-primary transition">Заказать</a>
             <a href="#faq" className="text-foreground hover:text-primary transition">FAQ</a>
           </nav>
-          <Button variant="default" className="hidden md:inline-flex" size="sm">
-            <Icon name="ShoppingCart" size={16} className="mr-2" />
-            Корзина
-          </Button>
+
         </div>
       </header>
 
@@ -86,7 +133,7 @@ export default function Index() {
                   <Icon name="Truck" className="text-primary" size={24} />
                   <span className="text-lg sm:text-xl font-bold text-primary">БЕСПЛАТНАЯ ДОСТАВКА</span>
                 </div>
-                <p className="text-sm text-muted-foreground">По всей России · СДЭК · Почта РФ</p>
+                <p className="text-sm text-muted-foreground">Вы сможете выбрать удобный способ доставки при оформлении заказа</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto">
@@ -370,6 +417,90 @@ export default function Index() {
 
                 <Separator />
 
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg">Контактные данные</h3>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="fullName">ФИО <span className="text-destructive">*</span></Label>
+                    <Input 
+                      id="fullName" 
+                      placeholder="Иванов Иван Иванович" 
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Телефон <span className="text-destructive">*</span></Label>
+                    <Input 
+                      id="phone" 
+                      type="tel"
+                      placeholder="+7 (999) 123-45-67" 
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email <span className="text-destructive">*</span></Label>
+                    <Input 
+                      id="email" 
+                      type="email"
+                      placeholder="example@mail.ru" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="space-y-2">
+                  <Label htmlFor="delivery">Способ доставки <span className="text-destructive">*</span></Label>
+                  <Select value={deliveryMethod} onValueChange={setDeliveryMethod} required>
+                    <SelectTrigger id="delivery">
+                      <SelectValue placeholder="Выберите способ доставки" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="cdek">
+                        <div className="flex items-center gap-2">
+                          <Icon name="Package" size={16} />
+                          СДЭК (3-5 дней)
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="yandex">
+                        <div className="flex items-center gap-2">
+                          <Icon name="Truck" size={16} />
+                          Яндекс Доставка (1-3 дня)
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="ozon">
+                        <div className="flex items-center gap-2">
+                          <Icon name="Package" size={16} />
+                          Озон Доставка (2-4 дня)
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="wb">
+                        <div className="flex items-center gap-2">
+                          <Icon name="Package" size={16} />
+                          WB доставка (2-5 дней)
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="russianpost">
+                        <div className="flex items-center gap-2">
+                          <Icon name="Mail" size={16} />
+                          Почта РФ (5-10 дней)
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <Separator />
+
                 <div className="space-y-2">
                   <Label>Способ оплаты</Label>
                   <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
@@ -387,35 +518,13 @@ export default function Index() {
                         СБП (Система Быстрых Платежей)
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-2 border rounded-lg p-3 hover:bg-accent/50 cursor-pointer">
-                      <RadioGroupItem value="cash" id="cash" />
-                      <Label htmlFor="cash" className="flex items-center gap-2 cursor-pointer flex-1">
-                        <Icon name="Wallet" size={18} />
-                        Наличные при получении
-                      </Label>
-                    </div>
                   </RadioGroup>
                 </div>
 
-                <Separator />
-
-                <div className="bg-primary/10 rounded-lg p-4 border-2 border-primary/30">
-                  <div className="flex items-center justify-center gap-3 mb-4">
-                    <Icon name="Truck" className="text-primary" size={32} />
-                    <div className="text-center">
-                      <div className="text-xl sm:text-2xl font-bold text-primary">БЕСПЛАТНАЯ ДОСТАВКА</div>
-                      <div className="text-sm text-muted-foreground">В любую точку России</div>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <Icon name="Check" className="text-primary" size={16} />
-                      <span>СДЭК (3-5 дней)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Icon name="Check" className="text-primary" size={16} />
-                      <span>Почта РФ (5-10 дней)</span>
-                    </div>
+                <div className="bg-primary/10 rounded-lg p-3 border border-primary/30">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Truck" className="text-primary" size={20} />
+                    <span className="text-sm font-semibold text-primary">Бесплатная доставка по всей России</span>
                   </div>
                 </div>
 
@@ -437,9 +546,14 @@ export default function Index() {
                   </div>
                 </div>
 
-                <Button className="w-full" size="lg">
+                <Button 
+                  className="w-full" 
+                  size="lg"
+                  onClick={handleSubmitOrder}
+                  disabled={isSubmitting || !fullName || !phone || !email || !deliveryMethod}
+                >
                   <Icon name="ShoppingBag" size={18} className="mr-2" />
-                  Оформить заказ
+                  {isSubmitting ? 'Оформление...' : 'Оформить заказ'}
                 </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
