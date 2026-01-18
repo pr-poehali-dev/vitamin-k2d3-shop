@@ -18,6 +18,8 @@ export default function Index() {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [address, setAddress] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,9 +27,68 @@ export default function Index() {
   const productPrice = 2490;
   const discountPrice = 1118;
 
+  const formatPhoneNumber = (value: string) => {
+    const cleaned = value.replace(/\D/g, '');
+    if (cleaned.length === 0) return '';
+    
+    let formatted = '+7';
+    if (cleaned.length > 1) {
+      formatted += ' (' + cleaned.substring(1, 4);
+    }
+    if (cleaned.length >= 5) {
+      formatted += ') ' + cleaned.substring(4, 7);
+    }
+    if (cleaned.length >= 8) {
+      formatted += '-' + cleaned.substring(7, 9);
+    }
+    if (cleaned.length >= 10) {
+      formatted += '-' + cleaned.substring(9, 11);
+    }
+    return formatted;
+  };
+
+  const handlePhoneChange = (value: string) => {
+    const formatted = formatPhoneNumber(value);
+    setPhone(formatted);
+    
+    const cleaned = value.replace(/\D/g, '');
+    if (cleaned.length > 0 && cleaned.length < 11) {
+      setPhoneError('Номер телефона должен содержать 11 цифр');
+    } else {
+      setPhoneError('');
+    }
+  };
+
+  const validateEmail = (value: string) => {
+    setEmail(value);
+    
+    if (!value) {
+      setEmailError('');
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setEmailError('Введите корректный email');
+    } else {
+      setEmailError('');
+    }
+  };
+
   const handleSubmitOrder = async () => {
     if (!fullName || !phone || !email || !address || !deliveryMethod) {
       alert('Пожалуйста, заполните все обязательные поля');
+      return;
+    }
+    
+    if (phoneError || emailError) {
+      alert('Пожалуйста, исправьте ошибки в форме');
+      return;
+    }
+    
+    const cleanedPhone = phone.replace(/\D/g, '');
+    if (cleanedPhone.length !== 11) {
+      alert('Номер телефона должен содержать 11 цифр');
       return;
     }
 
@@ -439,9 +500,11 @@ export default function Index() {
                       type="tel"
                       placeholder="+7 (999) 123-45-67" 
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={(e) => handlePhoneChange(e.target.value)}
+                      className={phoneError ? 'border-destructive' : ''}
                       required
                     />
+                    {phoneError && <p className="text-xs text-destructive">{phoneError}</p>}
                   </div>
 
                   <div className="space-y-2">
@@ -451,9 +514,11 @@ export default function Index() {
                       type="email"
                       placeholder="example@mail.ru" 
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => validateEmail(e.target.value)}
+                      className={emailError ? 'border-destructive' : ''}
                       required
                     />
+                    {emailError && <p className="text-xs text-destructive">{emailError}</p>}
                   </div>
                 </div>
 
