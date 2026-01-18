@@ -383,7 +383,10 @@ export default function Index() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="font-medium">Vitamin K2 + D3 MAX</span>
-                    <span className="text-muted-foreground">{productPrice}₽</span>
+                    <div className="flex items-center gap-2">
+                      <span className="line-through text-muted-foreground text-sm">{productPrice}₽</span>
+                      <span className="font-bold text-primary">{discountPrice}₽</span>
+                    </div>
                   </div>
                   
                   <div className="space-y-2">
