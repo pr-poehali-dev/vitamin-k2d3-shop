@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "Обработка успешного платежа",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "event": "payment.succeeded",
+        "object": {
+          "id": "test-payment-123",
+          "amount": {
+            "value": "1118.00"
+          },
+          "metadata": {
+            "customer_name": "Тестовый Пользователь",
+            "customer_phone": "+7 (999) 123-45-67",
+            "customer_email": "test@example.com",
+            "customer_address": "г Москва, ул Ленина, д 1",
+            "delivery_method": "cdek",
+            "quantity": 1
+          }
+        }
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "status": "success"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

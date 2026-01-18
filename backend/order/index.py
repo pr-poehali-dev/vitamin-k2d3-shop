@@ -161,7 +161,7 @@ def handler(event: dict, context) -> dict:
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": "https://pharmexpert.example.com/success"
+                "return_url": "https://preview--vitamin-k2d3-shop.poehali.dev/success"
             },
             "capture": True,
             "description": f"Заказ Vitamin K2 + D3 MAX x{quantity}",
