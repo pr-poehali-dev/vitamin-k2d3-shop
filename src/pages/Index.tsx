@@ -17,7 +17,7 @@ export default function Index() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const productPrice = 2490;
-  const discountPrice = 1;
+  const discountPrice = 1118;
 
   const handlePhoneChange = (value: string) => {
     setPhone(value);
