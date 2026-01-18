@@ -11,6 +11,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Icon from '@/components/ui/icon';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
+import InputMask from 'react-input-mask';
 
 export default function Index() {
   const [paymentMethod, setPaymentMethod] = useState('card');
@@ -27,29 +28,8 @@ export default function Index() {
   const productPrice = 2490;
   const discountPrice = 1118;
 
-  const formatPhoneNumber = (value: string) => {
-    const cleaned = value.replace(/\D/g, '');
-    if (cleaned.length === 0) return '';
-    
-    let formatted = '+7';
-    if (cleaned.length > 1) {
-      formatted += ' (' + cleaned.substring(1, 4);
-    }
-    if (cleaned.length >= 5) {
-      formatted += ') ' + cleaned.substring(4, 7);
-    }
-    if (cleaned.length >= 8) {
-      formatted += '-' + cleaned.substring(7, 9);
-    }
-    if (cleaned.length >= 10) {
-      formatted += '-' + cleaned.substring(9, 11);
-    }
-    return formatted;
-  };
-
   const handlePhoneChange = (value: string) => {
-    const formatted = formatPhoneNumber(value);
-    setPhone(formatted);
+    setPhone(value);
     
     const cleaned = value.replace(/\D/g, '');
     if (cleaned.length > 0 && cleaned.length < 11) {
@@ -495,15 +475,22 @@ export default function Index() {
 
                   <div className="space-y-2">
                     <Label htmlFor="phone">Телефон <span className="text-destructive">*</span></Label>
-                    <Input 
-                      id="phone" 
-                      type="tel"
-                      placeholder="+7 (999) 123-45-67" 
+                    <InputMask
+                      mask="+7 (999) 999-99-99"
                       value={phone}
                       onChange={(e) => handlePhoneChange(e.target.value)}
-                      className={phoneError ? 'border-destructive' : ''}
-                      required
-                    />
+                    >
+                      {(inputProps: any) => (
+                        <Input 
+                          {...inputProps}
+                          id="phone" 
+                          type="tel"
+                          placeholder="+7 (999) 123-45-67" 
+                          className={phoneError ? 'border-destructive' : ''}
+                          required
+                        />
+                      )}
+                    </InputMask>
                     {phoneError && <p className="text-xs text-destructive">{phoneError}</p>}
                   </div>
 
