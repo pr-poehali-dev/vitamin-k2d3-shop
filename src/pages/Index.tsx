@@ -87,11 +87,11 @@ export default function Index() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Icon name="Check" className="text-primary" size={20} />
-                  <span>Сертифицирован</span>
+                  <span>Премиальное сырье</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Icon name="Check" className="text-primary" size={20} />
-                  <span>90 капсул</span>
+                  <span>120 капсул</span>
                 </div>
               </div>
               <div className="flex gap-4 pt-4">
