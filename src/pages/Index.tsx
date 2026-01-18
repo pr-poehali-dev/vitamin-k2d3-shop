@@ -30,9 +30,8 @@ export default function Index() {
   ];
   
   const certificateImages = [
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/e16f1414-786d-4896-a539-34dbbfc8fa24.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/e16f1414-786d-4896-a539-34dbbfc8fa24.jpg',
-    'https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/files/e16f1414-786d-4896-a539-34dbbfc8fa24.jpg'
+    'https://cdn.poehali.dev/files/Скан СГР К2 +Д3 МАХ (1)_page-0001.jpg',
+    'https://cdn.poehali.dev/files/Скан СГР К2 +Д3 МАХ (1)_page-0002.jpg'
   ];
 
   const calculateDelivery = () => {
