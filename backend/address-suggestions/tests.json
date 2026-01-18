@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "name": "Получение подсказок адреса",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "query": "Москва Ленина"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "suggestions": "array"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Короткий запрос",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "query": "мо"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "suggestions": []
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

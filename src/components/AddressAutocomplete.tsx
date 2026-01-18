@@ -46,13 +46,12 @@ export default function AddressAutocomplete({ value, onChange, required }: Addre
 
     setIsLoading(true);
     try {
-      const response = await fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address', {
+      const response = await fetch('https://functions.poehali.dev/ba3d82a9-96db-4f22-9312-bd310ca9d20a', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token ' + import.meta.env.VITE_DADATA_API_KEY
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ query, count: 5 })
+        body: JSON.stringify({ query })
       });
 
       if (!response.ok) throw new Error('Failed to fetch suggestions');
