@@ -22,6 +22,8 @@ export default function Index() {
   const discountPrice = 1118;
   
   const productImages = [
+    'https://cdn.poehali.dev/files/1.png',
+    'https://cdn.poehali.dev/files/2.png',
     'https://cdn.poehali.dev/files/3.png',
     'https://cdn.poehali.dev/files/4.png',
     'https://cdn.poehali.dev/files/5.png'
