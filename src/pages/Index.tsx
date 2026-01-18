@@ -50,13 +50,8 @@ export default function Index() {
 
       const data = await response.json();
 
-      if (response.ok) {
-        alert('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
-        setFullName('');
-        setPhone('');
-        setEmail('');
-        setDeliveryMethod('');
-        setQuantity(1);
+      if (response.ok && data.paymentUrl) {
+        window.location.href = data.paymentUrl;
       } else {
         alert(data.error || 'Произошла ошибка при оформлении заказа');
       }

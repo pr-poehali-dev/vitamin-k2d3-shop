@@ -3,6 +3,8 @@ import os
 import urllib.request
 import urllib.parse
 import smtplib
+import base64
+import uuid
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -137,17 +139,98 @@ def handler(event: dict, context) -> dict:
             except Exception as e:
                 print(f'Email error: {e}')
         
-        return {
-            'statusCode': 200,
-            'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+        yookassa_shop_id = os.environ.get('YOOKASSA_SHOP_ID')
+        yookassa_secret_key = os.environ.get('YOOKASSA_SECRET_KEY')
+        
+        if not yookassa_shop_id or not yookassa_secret_key:
+            return {
+                'statusCode': 500,
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps({'error': 'ЮКасса не настроена. Добавьте YOOKASSA_SHOP_ID и YOOKASSA_SECRET_KEY'})
+            }
+        
+        idempotence_key = str(uuid.uuid4())
+        
+        payment_payload = {
+            "amount": {
+                "value": f"{total}.00",
+                "currency": "RUB"
             },
-            'body': json.dumps({
-                'success': True,
-                'message': 'Заказ успешно оформлен! Мы свяжемся с вами в ближайшее время.'
-            })
+            "confirmation": {
+                "type": "redirect",
+                "return_url": "https://pharmexpert.example.com/success"
+            },
+            "capture": True,
+            "description": f"Заказ Vitamin K2 + D3 MAX x{quantity}",
+            "metadata": {
+                "customer_name": full_name,
+                "customer_phone": phone,
+                "customer_email": email,
+                "delivery_method": delivery_method,
+                "quantity": quantity
+            }
         }
+        
+        if payment_method == 'sbp':
+            payment_payload['payment_method_data'] = {'type': 'sbp'}
+        
+        auth_string = f"{yookassa_shop_id}:{yookassa_secret_key}"
+        auth_bytes = auth_string.encode('utf-8')
+        auth_base64 = base64.b64encode(auth_bytes).decode('utf-8')
+        
+        yookassa_url = 'https://api.yookassa.ru/v3/payments'
+        yookassa_headers = {
+            'Authorization': f'Basic {auth_base64}',
+            'Idempotence-Key': idempotence_key,
+            'Content-Type': 'application/json'
+        }
+        
+        try:
+            yookassa_request = urllib.request.Request(
+                yookassa_url,
+                data=json.dumps(payment_payload).encode('utf-8'),
+                headers=yookassa_headers,
+                method='POST'
+            )
+            
+            with urllib.request.urlopen(yookassa_request) as response:
+                payment_response = json.loads(response.read().decode('utf-8'))
+                confirmation_url = payment_response.get('confirmation', {}).get('confirmation_url')
+                
+                if confirmation_url:
+                    return {
+                        'statusCode': 200,
+                        'headers': {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        'body': json.dumps({
+                            'success': True,
+                            'paymentUrl': confirmation_url,
+                            'message': 'Заказ создан. Перенаправление на оплату...'
+                        })
+                    }
+                else:
+                    return {
+                        'statusCode': 500,
+                        'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                        'body': json.dumps({'error': 'Не удалось создать платёж'})
+                    }
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode('utf-8')
+            print(f'YooKassa error: {error_body}')
+            return {
+                'statusCode': 500,
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps({'error': 'Ошибка при создании платежа', 'details': error_body})
+            }
+        except Exception as e:
+            print(f'Payment creation error: {e}')
+            return {
+                'statusCode': 500,
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps({'error': 'Ошибка при создании платежа', 'details': str(e)})
+            }
         
     except Exception as e:
         return {

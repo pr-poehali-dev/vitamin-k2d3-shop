@@ -16,7 +16,7 @@
       "expectedStatus": 200,
       "expectedBody": {
         "success": true,
-        "message": "string"
+        "paymentUrl": "string"
       },
       "bodyMatcher": "partial"
     },
