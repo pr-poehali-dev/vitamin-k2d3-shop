@@ -79,14 +79,13 @@ def handler(event: dict, context) -> dict:
 💳 Оплата: {payment_names.get(payment_method, payment_method)}"""
         
         telegram_token = os.environ.get('TELEGRAM_BOT_TOKEN')
-        telegram_chat_id = '@an_761'
+        telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
         
-        if telegram_token:
+        if telegram_token and telegram_chat_id:
             telegram_url = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
             telegram_data = urllib.parse.urlencode({
                 'chat_id': telegram_chat_id,
-                'text': telegram_message,
-                'parse_mode': 'HTML'
+                'text': telegram_message
             }).encode()
             
             try:
