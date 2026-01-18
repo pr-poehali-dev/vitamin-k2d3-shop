@@ -12,9 +12,6 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Icon from '@/components/ui/icon';
 
 export default function Index() {
-  const [deliveryMethod, setDeliveryMethod] = useState('');
-  const [city, setCity] = useState('');
-  const [deliveryCost, setDeliveryCost] = useState<number | null>(null);
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [quantity, setQuantity] = useState(1);
 
@@ -34,20 +31,7 @@ export default function Index() {
     'https://cdn.poehali.dev/files/Скан СГР К2 +Д3 МАХ (1)_page-0002.jpg'
   ];
 
-  const calculateDelivery = () => {
-    const costs = {
-      cdek: 350,
-      yandex: 250,
-      ozon: 300,
-      russianpost: 400
-    };
-    
-    if (deliveryMethod && city) {
-      setDeliveryCost(costs[deliveryMethod as keyof typeof costs] || 0);
-    }
-  };
 
-  const totalPrice = discountPrice * quantity + (deliveryCost || 0);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
@@ -96,6 +80,13 @@ export default function Index() {
                   <Icon name="Check" className="text-primary" size={18} />
                   <span>120 капсул</span>
                 </div>
+              </div>
+              <div className="bg-primary/10 rounded-lg p-4 border-2 border-primary/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="Truck" className="text-primary" size={24} />
+                  <span className="text-lg sm:text-xl font-bold text-primary">БЕСПЛАТНАЯ ДОСТАВКА</span>
+                </div>
+                <p className="text-sm text-muted-foreground">По всей России · СДЭК · Почта РФ</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto">
@@ -333,92 +324,8 @@ export default function Index() {
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center mb-8 sm:mb-12">
             Оформление заказа
           </h2>
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                  <Icon name="Package" className="text-primary" />
-                  Калькулятор доставки
-                </CardTitle>
-                <CardDescription className="text-sm">Рассчитайте стоимость доставки в ваш город</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="city">Ваш город</Label>
-                  <Input 
-                    id="city" 
-                    placeholder="Например: Москва" 
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="delivery">Способ доставки</Label>
-                  <Select value={deliveryMethod} onValueChange={setDeliveryMethod}>
-                    <SelectTrigger id="delivery">
-                      <SelectValue placeholder="Выберите способ доставки" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="cdek">
-                        <div className="flex items-center gap-2">
-                          <Icon name="Package" size={16} />
-                          СДЭК (3-5 дней)
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="yandex">
-                        <div className="flex items-center gap-2">
-                          <Icon name="Truck" size={16} />
-                          Яндекс Доставка (1-3 дня)
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="ozon">
-                        <div className="flex items-center gap-2">
-                          <Icon name="Package" size={16} />
-                          Озон Доставка (2-4 дня)
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="russianpost">
-                        <div className="flex items-center gap-2">
-                          <Icon name="Mail" size={16} />
-                          Почта РФ (5-10 дней)
-                        </div>
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <Button 
-                  onClick={calculateDelivery} 
-                  className="w-full"
-                  disabled={!city || !deliveryMethod}
-                >
-                  <Icon name="Calculator" size={18} className="mr-2" />
-                  Рассчитать доставку
-                </Button>
-
-                {deliveryCost !== null && (
-                  <div className="bg-accent/50 rounded-lg p-4 space-y-2 animate-fade-in">
-                    <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Стоимость доставки:</span>
-                      <span className="font-semibold text-lg">{deliveryCost}₽</span>
-                    </div>
-                    <Separator />
-                    <div className="flex justify-between items-center">
-                      <span className="font-semibold">Срок доставки:</span>
-                      <span className="text-muted-foreground">
-                        {deliveryMethod === 'yandex' && '1-3 дня'}
-                        {deliveryMethod === 'ozon' && '2-4 дня'}
-                        {deliveryMethod === 'cdek' && '3-5 дней'}
-                        {deliveryMethod === 'russianpost' && '5-10 дней'}
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            <Card>
+          <div className="max-w-2xl mx-auto">
+            <Card className="border-2 border-primary/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Icon name="ShoppingCart" className="text-primary" />
@@ -492,21 +399,41 @@ export default function Index() {
 
                 <Separator />
 
+                <div className="bg-primary/10 rounded-lg p-4 border-2 border-primary/30">
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <Icon name="Truck" className="text-primary" size={32} />
+                    <div className="text-center">
+                      <div className="text-xl sm:text-2xl font-bold text-primary">БЕСПЛАТНАЯ ДОСТАВКА</div>
+                      <div className="text-sm text-muted-foreground">В любую точку России</div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <Icon name="Check" className="text-primary" size={16} />
+                      <span>СДЭК (3-5 дней)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="Check" className="text-primary" size={16} />
+                      <span>Почта РФ (5-10 дней)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <Separator />
+
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground">Товары ({quantity} шт.)</span>
                     <span>{discountPrice * quantity}₽</span>
                   </div>
-                  {deliveryCost !== null && (
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-muted-foreground">Доставка</span>
-                      <span>{deliveryCost}₽</span>
-                    </div>
-                  )}
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-muted-foreground">Доставка</span>
+                    <span className="text-primary font-semibold">БЕСПЛАТНО</span>
+                  </div>
                   <Separator />
                   <div className="flex justify-between items-center text-base sm:text-lg font-bold">
                     <span>Итого:</span>
-                    <span className="text-primary">{totalPrice}₽</span>
+                    <span className="text-primary">{discountPrice * quantity}₽</span>
                   </div>
                 </div>
 
