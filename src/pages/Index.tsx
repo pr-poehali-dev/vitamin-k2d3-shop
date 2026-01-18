@@ -195,7 +195,7 @@ export default function Index() {
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-2xl">Витамин D3</CardTitle>
-                    <Badge variant="secondary" className="text-lg">2000 МЕ</Badge>
+                    <Badge variant="secondary" className="text-lg">5000 МЕ</Badge>
                   </div>
                   <CardDescription>Холекальциферол</CardDescription>
                 </CardHeader>
@@ -223,7 +223,7 @@ export default function Index() {
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-2xl">Витамин K2</CardTitle>
-                    <Badge variant="secondary" className="text-lg">200 мкг</Badge>
+                    <Badge variant="secondary" className="text-lg">75 мкг</Badge>
                   </div>
                   <CardDescription>Менахинон-7 (МК-7)</CardDescription>
                 </CardHeader>
@@ -263,7 +263,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-center gap-2">
                     <Icon name="Dot" className="text-primary" size={16} />
-                    <span>Желатиновая капсула — натуральная оболочка</span>
+                    <span>Желатиновая капсула — натуральная оболочка говяжий желатин (Халяль)</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Icon name="Dot" className="text-primary" size={16} />
