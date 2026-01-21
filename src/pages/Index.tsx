@@ -99,11 +99,11 @@ export default function Index() {
   };
   
   const productImages = [
-    'https://cdn.poehali.dev/files/1.png',
-    'https://cdn.poehali.dev/files/2.png',
-    'https://cdn.poehali.dev/files/3.png',
-    'https://cdn.poehali.dev/files/4.png',
-    'https://cdn.poehali.dev/files/5.png'
+    'https://cdn.poehali.dev/projects/YCAJEa6933SkxjQ1Y3L-4VJHBg7qOo52/bucket/1.png',
+    'https://cdn.poehali.dev/projects/YCAJEa6933SkxjQ1Y3L-4VJHBg7qOo52/bucket/2.png',
+    'https://cdn.poehali.dev/projects/YCAJEa6933SkxjQ1Y3L-4VJHBg7qOo52/bucket/3.png',
+    'https://cdn.poehali.dev/projects/YCAJEa6933SkxjQ1Y3L-4VJHBg7qOo52/bucket/4.png',
+    'https://cdn.poehali.dev/projects/YCAJEa6933SkxjQ1Y3L-4VJHBg7qOo52/bucket/5.png'
   ];
   
   const certificateImages = [
