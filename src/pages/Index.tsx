@@ -114,6 +114,20 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
+      <div className="bg-primary/10 border-b border-primary/20 py-2">
+        <div className="container mx-auto px-4 flex items-center justify-center gap-2">
+          <Icon name="MessageCircle" size={18} className="text-primary" />
+          <span className="text-sm text-foreground">Нужна консультация?</span>
+          <a 
+            href="https://t.me/badpoehalibot" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-primary hover:text-primary/80 transition underline"
+          >
+            Напишите нам в Telegram
+          </a>
+        </div>
+      </div>
       <header className="bg-white/80 backdrop-blur-sm border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
