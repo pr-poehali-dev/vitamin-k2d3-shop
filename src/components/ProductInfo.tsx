@@ -13,7 +13,7 @@ export default function ProductInfo({ certificateImages }: ProductInfoProps) {
       <section id="benefits" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center mb-8 sm:mb-12">
-            Почему выбирают <span className="text-primary">K2 + D3 MAX</span>
+            Почему выбирают <span className="text-primary">D3 MAX + K2</span>
           </h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
@@ -245,7 +245,7 @@ export default function ProductInfo({ certificateImages }: ProductInfoProps) {
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="item-1" className="border rounded-lg px-6">
                 <AccordionTrigger className="text-base sm:text-lg font-semibold hover:text-primary">
-                  Как принимать витамины K2 + D3?
+                  Как принимать витамины D3 MAX + K2?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm sm:text-base text-muted-foreground">
                   Рекомендуется принимать 1 капсулу в день во время еды, желательно с пищей, содержащей жиры, 

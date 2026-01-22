@@ -71,7 +71,7 @@ export default function OrderForm({
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="font-medium">Vitamin K2 + D3 MAX</span>
+                  <span className="font-medium">Vitamin D3 MAX + K2</span>
                   <div className="flex items-center gap-2">
                     <span className="line-through text-muted-foreground text-sm">{productPrice}₽</span>
                     <span className="font-bold text-primary">{discountPrice}₽</span>

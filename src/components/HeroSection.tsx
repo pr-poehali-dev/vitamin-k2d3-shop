@@ -17,7 +17,7 @@ export default function HeroSection({ productPrice, discountPrice, productImages
           <div className="space-y-6 animate-fade-in">
             <Badge className="bg-accent text-accent-foreground">Новинка 2026</Badge>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight">
-              Vitamin K2 + D3 <span className="text-primary">MAX</span>
+              Vitamin D3 <span className="text-primary">MAX</span> + K2
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
               Синергия двух витаминов для здоровья костей, сердца и иммунитета. 
@@ -64,7 +64,7 @@ export default function HeroSection({ productPrice, discountPrice, productImages
                   <CarouselItem key={index}>
                     <img 
                       src={image}
-                      alt={`Vitamin K2 + D3 MAX - фото ${index + 1}`}
+                      alt={`Vitamin D3 MAX + K2 - фото ${index + 1}`}
                       className="relative rounded-xl sm:rounded-2xl shadow-2xl w-full object-contain"
                     />
                   </CarouselItem>
