@@ -198,6 +198,16 @@ export default function Index() {
           </div>
         </div>
       </footer>
+
+      <a 
+        href="https://t.me/badpoehalibot" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-4 shadow-2xl transition-all hover:scale-110 animate-bounce"
+        aria-label="Написать в поддержку"
+      >
+        <Icon name="MessageCircle" size={24} />
+      </a>
     </div>
   );
 }
