@@ -9,14 +9,21 @@ export default function CountdownTimer() {
   });
 
   useEffect(() => {
-    const totalSeconds = 22 * 60 * 60;
+    const endTime = new Date().getTime() + (22 * 60 * 60 * 1000);
 
     const timer = setInterval(() => {
-      const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
+      const now = new Date().getTime();
+      const difference = endTime - now;
 
-      setTimeLeft({ hours, minutes, seconds });
+      if (difference > 0) {
+        const hours = Math.floor(difference / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        setTimeLeft({ hours, minutes, seconds });
+      } else {
+        setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+      }
     }, 1000);
 
     return () => clearInterval(timer);
