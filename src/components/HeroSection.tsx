@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Icon from '@/components/ui/icon';
+import CountdownTimer from '@/components/CountdownTimer';
 
 interface HeroSectionProps {
   productPrice: number;
@@ -50,6 +51,7 @@ export default function HeroSection({ productPrice, discountPrice, productImages
                 </p>
               </div>
             </div>
+            <CountdownTimer />
             <div className="bg-primary/10 rounded-lg p-4 border-2 border-primary/30">
               <div className="flex items-center gap-2 mb-2">
                 <Icon name="Truck" className="text-primary" size={24} />
