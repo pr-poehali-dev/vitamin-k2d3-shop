@@ -37,6 +37,19 @@ export default function HeroSection({ productPrice, discountPrice, productImages
                 <span>120 капсул</span>
               </div>
             </div>
+            <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4 flex items-start gap-4">
+              <img 
+                src="https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/2ec09252-d831-40b1-a1da-039b2bc1d54c.png" 
+                alt="Честный ЗНАК"
+                className="w-16 h-16 object-contain flex-shrink-0"
+              />
+              <div className="flex-1">
+                <h3 className="font-bold text-base mb-1">Маркировка «Честный ЗНАК»</h3>
+                <p className="text-sm text-muted-foreground">
+                  Каждая упаковка имеет уникальный код для проверки подлинности. Проверьте товар в приложении «Честный ЗНАК» или на сайте <a href="https://честныйзнак.рф" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">честныйзнак.рф</a>
+                </p>
+              </div>
+            </div>
             <div className="bg-primary/10 rounded-lg p-4 border-2 border-primary/30">
               <div className="flex items-center gap-2 mb-2">
                 <Icon name="Truck" className="text-primary" size={24} />
