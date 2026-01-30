@@ -41,7 +41,7 @@ export default function HeroSection({ productPrice, discountPrice, productImages
               <img 
                 src="https://cdn.poehali.dev/projects/4696e304-b9fe-407b-ade8-de9ddc6c34d7/bucket/2ec09252-d831-40b1-a1da-039b2bc1d54c.png" 
                 alt="Честный ЗНАК"
-                className="w-24 h-full object-contain flex-shrink-0"
+                className="w-32 sm:w-36 h-full object-contain flex-shrink-0"
               />
               <div className="flex-1">
                 <h3 className="font-bold text-base mb-1">Маркировка «Честный ЗНАК»</h3>
